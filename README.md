@@ -1,1 +1,1 @@
-A program that emulates all docking stations, bikes and infrastructure.
+A program that emulates the operation of the docking stations, bikes and infrastructure of the Santander Cycle Scheme.
