@@ -6,19 +6,12 @@ class DockingStation
     Bike.new
   end
 
-#  def is_dock_taken?
-#    taken   = true
-#  end
+  def dock(bike)
+    bike
+  end
 
-  #def dock_bike
-  #end
+  def bike
 
-def have_bike
-  false
-end
-
-
-def dock(bike)
-end
+  end
 
 end

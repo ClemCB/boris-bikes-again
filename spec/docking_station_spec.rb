@@ -14,19 +14,17 @@ describe DockingStation do
 
   it { is_expected.to respond_to(:dock).with(1).argument }
 
-#  it "docks a bike at docking station" do
-#    expect(subject).to respond_to :dock_bike
-#  end
+  it { is_expected.to respond_to(:bike) }
 
-  #it "returns true if bike is docked" do
-  #  taken = subject.dock_bike
-  #  expect(taken).to be_is_dock_taken
-  #end
-  describe "have_bike" do
-    it "expects false return from docking station", focus: true do
-      expect(subject.have_bike).to eq false
-    end
+  it 'docks something' do
+    bike = Bike.new
+    expect(subject.dock(bike)).to eq bike
   end
 
+  it 'return docked bikes' do
+    bike = Bike.new
+    subject.dock(bike)
+    expect(subject.bike).to eq bike
+  end
 
 end
