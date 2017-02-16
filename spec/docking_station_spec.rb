@@ -37,5 +37,14 @@ describe DockingStation do
       expect { subject.release_bike }.to raise_error("There are no more bikes!")
     end
   end
-  
+
+  describe '#dock' do
+    it "raises an error when there is already docked bike" do
+      bike_one = Bike.new
+      subject.dock(bike_one)
+      bike_two = Bike.new
+      expect { subject.dock(bike_two) }.to raise_error("There is already docked bike!")
+    end
+  end
+
 end
