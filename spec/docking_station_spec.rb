@@ -28,7 +28,7 @@ describe DockingStation do
 
   it 'return docked bikes' do
     array_of_bikes = []
-    20.times {array_of_bikes.push(subject.dock Bike.new)}
+    DockingStation::DEFAULT_CAPACITY.times {array_of_bikes.push(subject.dock Bike.new)}
     expect(subject.bikes).to eq array_of_bikes
   end
 
@@ -40,7 +40,7 @@ describe DockingStation do
 
   describe '#dock' do
     it "raises an error when there is already docked bike" do
-      20.times {subject.dock Bike.new}
+      DockingStation::DEFAULT_CAPACITY.times {subject.dock Bike.new}
       expect { subject.dock Bike.new }.to raise_error("There are already 20 bikes docked - there is no more space!")
     end
   end
