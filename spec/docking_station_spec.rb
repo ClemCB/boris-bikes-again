@@ -10,7 +10,7 @@ describe DockingStation do
         expect { docking_station.dock Bike.new}.to raise_error "There are already the maximum number of bikes docked - there is no more space!"
       end
     end
-    
+
 
     # For Joe to worry about this weekend!!
     # it 'should expect initalize to be given an argument', :focus => true do
@@ -24,14 +24,20 @@ describe DockingStation do
     end
 
   describe '#release_bike' do
-    it 'releases a bike' do
-      bike = Bike.new
+    it 'only releases a bike when there is a working bikes available' do
+      bike = Bike.new(true)
       subject.dock(bike)
       expect(subject.release_bike). to eq bike
       end
+
+      it 'does not release a bike when there are no working bikes available' do
+        bike = Bike.new(false)
+        subject.dock(bike)
+        expect{ subject.release_bike }.to raise_error("No working bikes available!")
+        end
     end
 
-  it "returns a new instance of Bike.new" do
+  it "returns a working bike by default when Bike.new is called" do
     #bike = subject.release_bike
     bike = Bike.new
     expect(bike).to be_working
@@ -57,6 +63,9 @@ describe DockingStation do
       expect { subject.release_bike }.to raise_error("There are no more bikes!")
     end
   end
+
+
+
 
   describe '#dock' do
     it "raises an error when there is already docked bike" do
