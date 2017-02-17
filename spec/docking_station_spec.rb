@@ -3,6 +3,26 @@ require 'docking_station'
 
 describe DockingStation do
 
+    describe 'initalization' do
+      it 'has a variable capacity' do
+        docking_station = DockingStation.new(50)
+        50.times {docking_station.dock Bike.new}
+        expect { docking_station.dock Bike.new}.to raise_error "There are already the maximum number of bikes docked - there is no more space!"
+      end
+    end
+    
+
+    # For Joe to worry about this weekend!!
+    # it 'should expect initalize to be given an argument', :focus => true do
+    #   allow(subject).to receive(:initialize).with(an_instance_of(Object))
+    # end
+
+    describe '#initialize default values' do
+      it 'should have a default capacity of 20 if no other capacity is set' do
+      expect(subject.capacity).to eq DockingStation::DEFAULT_CAPACITY
+      end
+    end
+
   describe '#release_bike' do
     it 'releases a bike' do
       bike = Bike.new
@@ -40,8 +60,8 @@ describe DockingStation do
 
   describe '#dock' do
     it "raises an error when there is already docked bike" do
-      DockingStation::DEFAULT_CAPACITY.times {subject.dock Bike.new}
-      expect { subject.dock Bike.new }.to raise_error("There are already 20 bikes docked - there is no more space!")
+      subject.capacity.times {subject.dock Bike.new}
+      expect { subject.dock Bike.new }.to raise_error("There are already the maximum number of bikes docked - there is no more space!")
     end
   end
 
