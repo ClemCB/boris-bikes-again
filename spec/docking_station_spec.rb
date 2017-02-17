@@ -19,7 +19,7 @@ describe DockingStation do
 
   it { is_expected.to respond_to(:dock).with(1).argument }
 
-  it { is_expected.to respond_to(:bike) }
+  it { is_expected.to respond_to(:bikes) }
 
   it 'docks something' do
     bike = Bike.new
@@ -27,9 +27,9 @@ describe DockingStation do
   end
 
   it 'return docked bikes' do
-    bike = Bike.new
-    subject.dock(bike)
-    expect(subject.bike).to eq bike
+    array_of_bikes = []
+    20.times {array_of_bikes.push(subject.dock Bike.new)}
+    expect(subject.bikes).to eq array_of_bikes
   end
 
   describe '#release_bike' do
@@ -40,10 +40,8 @@ describe DockingStation do
 
   describe '#dock' do
     it "raises an error when there is already docked bike" do
-      bike_one = Bike.new
-      subject.dock(bike_one)
-      bike_two = Bike.new
-      expect { subject.dock(bike_two) }.to raise_error("There is already docked bike!")
+      20.times {subject.dock Bike.new}
+      expect { subject.dock Bike.new }.to raise_error("There are already 20 bikes docked - there is no more space!")
     end
   end
 
